@@ -1,0 +1,104 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="table-responsive">
+  <table class="table">
+  <tr>
+    <td> 
+
+          <h1 class="page-header text-center" style="color:#00008B;">
+            Welcome to the Group Shoppy! <br /><small style="color:#FF69B4;">why Shop Alone!</small>
+          </h1>
+<!--
+        <H1 class="text-center" style="color:#00008B;"  >Welcome to the Group Shoppy!<br /></H1>
+        <H4 class="text-center" style="color:#FF69B4;"  >why Shop Alone!</H4> -->
+        <div class="container">
+          <div class="text-center row">
+            <div class="col-lg-12">
+              <h4 class="column-header">Features:</h4>
+              <ul class="nav nav-tabs nav-stacked col-lg-4" ng-repeat="thing in awesomeThings">
+                <li><a href="/" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+    </td>
+    <td >
+        <div ng-controller="CarouselCtrl">
+      <div height="225px">
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+              <img class="text-center"  background-color:ng-transclude ng-src="{{slide.image}}" width="225px"  >
+                <div class="carousel-caption">
+                    <a href="/products/{{slide.id}}">
+                    <h4>{{slide.text}}</h4>
+                    </a>
+                </div>
+           </slide>
+         </carousel>
+      </div>
+    </div>
+    </td>
+    <td class="text-right"> <br /> <br /><img src="assets/images/GroupShoppy.png" height=150 width = 300 alt="logo"/> </td>    
+  </tr> 
+  </table>
+
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="search" placeholder="Search Products...">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      </span>      
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+<br></br>
+
+<table class="table table-responsive">
+     <!-- header -->
+   <tr class="well">
+            <td></td>
+                    <td><b>Item</b></td>
+                    <td class="text-right"><b>Price</b></td>
+                    <td class="text-center" colspan="4">
+                  <a href="/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                    <img ng-src="assets/images/shopping_cart.ico" height=40 width=40 alt="Go to Cart" />
+                    <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+                  </a>
+               </td>
+                    
+    </tr>
+    
+    <tr ng-repeat="product in shop.products | orderBy:'name' | filter:search" >
+        <td class="text-center"><img ng-src="{{product.image}}" height=60 width=60 alt="{{product.name}}" /></td>
+        <td>
+            <a href="/products/{{product.id}}"><b>{{product.name}}</b></a><br />
+            {{product.description}}
+        </td>
+        <td class="text-right">
+            {{product.price | currency}}
+        </td>
+        <td class="text-center">
+            <a href="" ng-click="cart.addItem(product.id, product.name, product.price, 1)">
+                <img ng-src="assets/images/add_to_cart.ico" height=30 width=30 alt="Add to Cart" />
+            </a>
+        </td>
+    </tr>
+    <tr class="well">
+        <td class="text-center" colspan="4">
+            <a href="/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <img ng-src="assets/images/shopping_cart.ico" height=40 width=40 alt="Go to Cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+</table>
+
+
+
+<footer class="footer">
+  <div class="container">
+      <p><a href="https://twitter.com/mynus26">@mynus26</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>

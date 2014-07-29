@@ -1,0 +1,71 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="row">
+
+<div class="col-sm-1 text-right">
+<img ng-src="assets/images/products/{{product.id}}.jpg" alt="{{product.name}}"/>
+</div>
+<div class="col-lg-9 text-left">
+<H2 style="color:#00008B;"> {{product.name}}: {{product.description}} </H2><br />
+</div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-lg-10">
+
+            <!-- product info -->
+            <table class="table table-bordered">
+
+                <tr class="well">
+                    <td class="text-right" colspan="10" >
+                        <a href="/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                            <span ng-show="cart.getTotalCount(product.id) > 0"><img ng-src="assets/images/cart_accept.ico" height=40 width=40 alt="this item is in the cart" /></span>
+<span ng-show="cart.getTotalCount(product.id) < 1 && cart.getTotalCount() > 0"><img ng-src="assets/images/shopping_cart.ico" height=40 width=40 alt="this item is in the cart" /></span>                          
+                            <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+
+                        </a>
+                    </td>
+                </tr>
+         		<tr>
+                    <td class="text-left"><b> Product Description:</b></td>
+                    
+                </tr>
+                <tr >
+                    <td class="text-left">{{product.details}}</td>
+                </tr>                
+
+                <tr class="well">
+                    <td class="text-right" colspan="3" >
+                        <a href="/cart" title="Go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                            <span ng-show="cart.getTotalCount(product.id) > 0"><img ng-src="assets/images/cart_accept.ico" height=40 width=40 alt="this item is in the cart" /></span>
+                            <span ng-show="cart.getTotalCount(product.id) < 1 && cart.getTotalCount() > 0"><img ng-src="assets/images/shopping_cart.ico" height=40 width=40 alt="this item is in the cart" /></span>                            
+                            <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <!-- buttons -->
+        <div class="col-lg-2">
+            <button 
+                class="btn btn-block btn-success" 
+                ng-click="cart.addItem(product.id, product.name, product.price, 1)">
+                <i class="glyphicon glyphicon-shopping-cart" /> Add to cart
+            </button>
+            <button 
+                class="btn btn-block btn-danger" 
+                ng-click="cart.addItem(product.id, product.name, product.price, -10000)"
+                ng-disabled="cart.getTotalCount(product.sku) < 1">
+                <i class="glyphicon glyphicon-trash" /> Remove from cart
+            </button>
+            <button 
+                class="btn btn-block" 
+                onclick="window.location.href=''">
+                <i class="glyphicon glyphicon-chevron-left" /> Back to store
+            </button>
+        </div>
+    </div>
+</div>

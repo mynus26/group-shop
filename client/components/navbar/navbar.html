@@ -1,0 +1,46 @@
+<div class="navbar  navbar-static-top bg-info"  ng-controller="NavbarCtrl">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"> <img src="assets/images/SAP_Logo.png" alt="SAP Logo"/> <img src="assets/images/GrpShoppy.png" height=35 width=55 alt="Group Shoppy"/> </a>
+    </div>
+    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+      </ul>
+    
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login"><img ng-src="assets/images/user.ico" height=20 width=20 alt=""/>Login</a></li>
+        <li class="dropdown">
+          <a href class="dropdown-toggle" ng-show="isLoggedIn()" on-toggle="toggled(open)"><img ng-show="isLoggedIn() && getCurrentUser().facebook.id" ng-src="https://graph.facebook.com/{{getCurrentUser().facebook.id}}/picture?width=30&height=30" height=30 width=30 alt=""/><b>{{ getCurrentUser().name }}</b><span class="caret"></span> </a>
+          <ul class="dropdown-menu" role="menu">
+            <li> <a ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+          </ul>
+        </li>
+        <li ng-show="isLoggedIn() && !getCurrentUser().facebook.id" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        
+        <li><a ng-href="#" ng-show="isLoggedIn()">My Account</a></li>
+        <li><a ng-href="#" ng-show="isLoggedIn()">Order Status</a></li>
+        <li><a ng-href="#">Help</a></li>
+        <li><a  ng-href="http://www.facebook.com/" title="Facebook" target="_blank"><img ng-src="assets/images/facebook.ico" height=30 width=30 alt="Facebook"/></a></li>
+        <li ><a ng-href="http://www.twitter.com" title="Twitter" target="_blank" ><img ng-src="assets/images/twitter.ico" height=30 width=30 alt="Twitter"/></a></li>
+        <li><a ng-href="http://www.youtube.com" title="YouTube" target="_blank"><img ng-src="assets/images/youtube.ico" height=30 width=30 alt="YouTube"/></a></li>
+
+      </ul>
+      <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
+  </div>
+</div>
