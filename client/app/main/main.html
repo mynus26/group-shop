@@ -74,11 +74,8 @@
         <td class="col-lg-9">
             <a href="/products/{{product.id}}"><b>{{product.name}}</b></a><br />
             {{product.description}}<br />
-            <div ng-init="rate = 3"> 
-            <rating ng-model="rate" style="color:#C47451;" min=0 max=5 readonly=false ></rating> Rating:{{product.reviewAvg}} - {{product.reviewCount}} Reviews</div>
-
-
-<!-- <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" {{100 * {{product.reviewAvg}} / 5 %}} </span>  -->
+            <div ng-init=setRate(product.reviewAvg) > 
+            <rating ng-model="rate" style="color:#C47451;" min=0 max=5 readonly=false ></rating> <span style="color:#808080;">Rating:{{product.reviewAvg}} - {{product.reviewCount}} Reviews </span></div>
         </td>
         <td class="text-right">
             {{product.price | currency}}

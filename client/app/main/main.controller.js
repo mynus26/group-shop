@@ -20,10 +20,15 @@ angular.module('groupShopApp')
       $http.delete('/api/things/' + thing._id);
     };
 
+        $scope.setRate = function(rate) {
+
+      $scope.rate = (rate != null) ? rate : 0;
+    };
+
        // get shop and cart from service
     $scope.shop = DataService.shop;
     $scope.cart = DataService.cart;
-    //$scope.user = Auth.getCurrentUser();
+    $scope.user = DataService.user;
     //console.log($scope.user.email);
 
     // use routing to pick the selected product

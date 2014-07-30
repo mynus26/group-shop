@@ -23,7 +23,7 @@ exports.index = function(req, res) {
 
 exports.findByEmail =  function (req, res) {
     if (!req.params.email) {
-        Cart.find({ email: req.params.email }, function (err, cart) {
+        Cart.find({ owner: req.params.email }, function (err, cart) {
            if(err) { return handleError(res, err); }
            if(!cart) { return res.send(404); }
             return res.json(cart);

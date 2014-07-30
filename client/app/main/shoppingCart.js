@@ -7,7 +7,7 @@
 angular.module('groupShopApp').factory('shoppingCart', function ($http) {
 
 
-var shoppingCart = function (cartName, email) {
+var shoppingCart = function (cartName, owner) {
     this.cartName = cartName;
     this.clearCart = false;
     this.checkoutParameters = {};
@@ -15,7 +15,7 @@ var shoppingCart = function (cartName, email) {
     this.items = [];
 
     // load items from local storage when initializing
-    this.loadItems();
+    this.loadItems(owner);
 
     // save items to local storage when unloading
     var self = this;
@@ -29,12 +29,16 @@ var shoppingCart = function (cartName, email) {
 }
 
 // load items from local storage
-shoppingCart.prototype.loadItems = function () {
+shoppingCart.prototype.loadItems = function (owner) {
 
-    $http.get('/api/cart', { email: 'test@test.com'}).success(function (sharedCart) {
-  this.sharedCart = sharedCart; });
+    this.items = [];
+    sharedCart = null;
+
+    $http.get('/api/cart', { email: owner}).success(function (cart) {
+  sharedCart= cart; });
+
       
-    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null ;
+    var items = (sharedCart != null) ? sharedCart.items : ((localStorage != null) ? localStorage[this.cartName + "_items"] : null) ;
     if (items != null && JSON != null) {
         try {
             var items = JSON.parse(items);

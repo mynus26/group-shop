@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('groupShopApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, DataService) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -17,6 +17,7 @@ angular.module('groupShopApp')
           // Logged in, redirect to home
           $location.path('/');
           DataService.user= $scope.user;
+          DataService.cart.loadItems($scope.user.email);
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
@@ -26,5 +27,7 @@ angular.module('groupShopApp')
 
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
+      DataService.user= $scope.user;
+      DataService.cart.loadItems($scope.user.email);
     };
   });
