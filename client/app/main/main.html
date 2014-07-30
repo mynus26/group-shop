@@ -70,16 +70,21 @@
     </tr>
     
     <tr ng-repeat="product in shop.products | orderBy:'name' | filter:search" >
-        <td class="text-center"><img ng-src="{{product.image}}" height=60 width=60 alt="{{product.name}}" /></td>
-        <td>
+        <td class="text-center"><img ng-src="{{product.thumbnail}}"  alt="{{product.name}}" /></td>
+        <td class="col-lg-9">
             <a href="/products/{{product.id}}"><b>{{product.name}}</b></a><br />
-            {{product.description}}
+            {{product.description}}<br />
+            <div ng-init="rate = 3"> 
+            <rating ng-model="rate" style="color:#C47451;" min=0 max=5 readonly=false ></rating> Rating:{{product.reviewAvg}} - {{product.reviewCount}} Reviews</div>
+
+
+<!-- <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" {{100 * {{product.reviewAvg}} / 5 %}} </span>  -->
         </td>
         <td class="text-right">
             {{product.price | currency}}
         </td>
         <td class="text-center">
-            <a href="" ng-click="cart.addItem(product.id, product.name, product.price, 1)">
+            <a href="" ng-click="cart.addItem(product.id, product.name, product.price,  1, product.thumbnail)">
                 <img ng-src="assets/images/add_to_cart.ico" height=30 width=30 alt="Add to Cart" />
             </a>
         </td>

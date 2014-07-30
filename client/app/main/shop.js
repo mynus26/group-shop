@@ -17,7 +17,11 @@ angular.module('groupShopApp').factory('shop', function ($http) {
                               name: tmpProducts[i].name,
                               description: tmpProducts[i].longDescription,
                               price: tmpProducts[i].salePrice,
-                              image: tmpProducts[i].image};
+                              reviewCount: tmpProducts[i].customerReviewCount,
+                              reviewAvg: tmpProducts[i].customerReviewAverage,
+                              thumbnail:tmpProducts[i].thumbnailImage,
+                              image: tmpProducts[i].image
+                          };
             self.products.push(myProduct);
 
         }

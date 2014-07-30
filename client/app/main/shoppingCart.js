@@ -41,7 +41,7 @@ shoppingCart.prototype.loadItems = function () {
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
                 if (item.id != null && item.name != null && item.price != null && item.quantity != null) {
-                    item = new cartItem(item.id, item.name, item.price, item.quantity);
+                    item = new cartItem(item.id, item.name, item.price, item.quantity, item.image);
                     this.items.push(item);
                 }
             }
@@ -60,7 +60,7 @@ shoppingCart.prototype.saveItems = function () {
 }
 
 // adds an item to the cart
-shoppingCart.prototype.addItem = function (id, name, price, quantity) {
+shoppingCart.prototype.addItem = function (id, name, price, quantity, image) {
     quantity = this.toNumber(quantity);
     if (quantity != 0) {
 
@@ -79,7 +79,7 @@ shoppingCart.prototype.addItem = function (id, name, price, quantity) {
 
         // new item, add now
         if (!found) {
-            var item = new cartItem(id, name, price, quantity);
+            var item = new cartItem(id, name, price, quantity, image);
             this.items.push(item);
         }
 
@@ -342,11 +342,12 @@ function checkoutParameters(serviceName, merchantID, options) {
 //----------------------------------------------------------------
 // items in the cart
 //
-function cartItem(id, name, price, quantity) {
+function cartItem(id, name, price, quantity, image) {
     this.id = id;
     this.name = name;
     this.price = price * 1;
     this.quantity = quantity * 1;
+    this.image = image;
 }
 
 return shoppingCart;

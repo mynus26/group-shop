@@ -35,12 +35,16 @@ angular.module('groupShopApp')
 angular.module('groupShopApp')
   .controller('CarouselCtrl', function ($scope) {
     $scope.myInterval = 2500;
+    //var total = $scope.shop.products.length;
     var slides = $scope.slides = [];
     $scope.addSlide = function(num) {
       slides.push({
         image: 'assets/images/full/' + num + '.jpg',
         text: ['Samsung HDTV','SONY Google TV','VIZIO TV', 'Toshiba TV', 'Sharp TV'][slides.length % 5] ,
         id: [1,2,3, 4, 5][slides.length % 5] 
+        //         image: $scope.shop.products[i].image,
+        // text: $scope.shop.products[i].name ,
+        // id: $scope.shop.products[i].id 
 
       });
     };

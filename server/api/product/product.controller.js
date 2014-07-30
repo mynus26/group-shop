@@ -17,7 +17,8 @@ var options = {
 //port:80,
 host: 'api.remix.bestbuy.com',
 //path: '/index.html',
-path:'/v1/products(search=tv&manufacturer=sony&customerReviewAverage%3E4&salePrice%3E550)?format=json&show=longDescription,shortDescription,customerReviewCount,customerReviewAverage,sku,name,image,salePrice&apiKey=7p7nhhmq6ftt22347pmcz5dt',
+
+path:'/v1/products(search=tv*&manufacturer=Samsung)?format=json&show=longDescription,shortDescription,customerReviewCount,customerReviewAverage,sku,name,image,salePrice,thumbnailImage&apiKey=bckq8793syv9gnv6jynds25g',
 agent: false
 };
 http.get(options,function(http_res){
